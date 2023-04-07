@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="titre">Date de naissance :</label>
-                                                <input type="date" class="form-control" name="date_naissance" id="titre" placeholder="Date de naissance" required>
+                                                <input type="date" class="form-control" name="date_naissance" id="titre" placeholder="Date de naissance">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary text-left" data-dismiss="modal">Annuler</button>

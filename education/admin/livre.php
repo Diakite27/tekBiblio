@@ -223,11 +223,17 @@
                                 INNER JOIN livre ON livre_auteur.id_livre = livre.id_livre
                                 INNER JOIN auteur ON livre_auteur.id_auteur = auteur.id_auteur
                                 INNER JOIN genre ON livre.id_genre = genre.id_genre
+                                LEFT JOIN emprunt ON livre.id_livre = emprunt.id_livre AND emprunt.date_retour IS NULL
                                 GROUP BY livre.titre;
-                                ", "livre.id_livre, livre.titre, GROUP_CONCAT(auteur.nom , ' ', auteur.prenom SEPARATOR ' et ') AS auteurs, livre.nombre_exemplaires, genre.nom_genre AS genre");
+                                ", "livre.id_livre, livre.titre, GROUP_CONCAT(auteur.nom , ' ', auteur.prenom SEPARATOR ' et ') AS auteurs, livre.nombre_exemplaires, genre.nom_genre AS genre,
+                                CASE 
+                                    WHEN livre.nombre_exemplaires - COUNT(emprunt.id_livre) > 0 THEN '<span style=\"color: green\">Oui</span>' 
+                                    ELSE '<span style=\"color: red\">Non</span>' 
+                                END AS dispo
+                                ");
                                 // var_dump($s);
-                                $colonnes = array("Titre", "Auteur (s)", "Nombre d'exemplaire", "Catégory");
-                                echo $bd->afficher($colonnes, $datas, ["titre", "auteurs", "nombre_exemplaires", "genre"], "livre.php");
+                                $colonnes = array("Titre", "Auteur (s)", "Nombre d'exemplaire", "Catégory", "Disponible");
+                                echo $bd->afficher($colonnes, $datas, ["titre", "auteurs", "nombre_exemplaires", "genre", "dispo"], "livre.php");
                             ?>
                             <!-- End Table with stripped rows -->
 

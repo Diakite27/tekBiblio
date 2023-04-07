@@ -159,9 +159,9 @@
                                 ORDER BY emprunt.id DESC;",
                                 "id, livre.titre, CONCAT (eleve.nom, ' ', eleve.prenom) as etudiant, date_emprunt, date_retour_prevue,
                                 CASE 
-                                    WHEN date_retour <= date_retour_prevue THEN '<span style=\"color: red\">Déposé</span>' 
-                                    WHEN date_retour_prevue < NOW() THEN 'Non déposé' 
-                                    ELSE '<span style=\"color: green\">En cours</span>' 
+                                    WHEN date_retour <= date_retour_prevue THEN '<span style=\"color: green\">Déposé</span>' 
+                                    WHEN date_retour_prevue < NOW() THEN '<span style=\"color: red\"> Non Déposé</span>' 
+                                    ELSE '<span style=\"color: yellow\">En cours</span>' 
                                 END AS statut"
                                 );
                                 // var_dump($s);
@@ -236,6 +236,7 @@
     </main>
     <!-- End #main -->
 
+    
 
 <?php include('includes/footer.php'); ?>
 

@@ -222,7 +222,7 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="etudiant.php">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-people-fill"></i>
             <span>Gérer les étudiants</span>
         </a>
     </li>

@@ -1,3 +1,6 @@
+<?php
+    require "database.php";
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -63,10 +66,27 @@
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+    <style>
+			.fh5co-nav li {
+				display: inline-block;
+				margin-right: 20px;
+				padding: 10px;
+				font-size: 18px;
+				font-weight: bold;
+				color: red;
+				text-transform: uppercase;
+				text-decoration: none;
+				border-bottom: 2px solid transparent;
+			  }
+			  
+			  .fh5co-nav li:hover {
+				border-bottom: 2px solid #333;
+				color: #333;
+			  }
+			  .fh5co-nav ul li.active a {
+				font-weight: bold;
+			  }  
+	</style>
 
 </head>
 
@@ -100,21 +120,23 @@
                         </div>
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
-                                <li class="active"><a href="index.php">Accueil</a></li>
-                                <li><a href="courses.html">Livres</a></li>
+                                <li class="active"><a href="index.html">Accueil</a></li>
+                                <li><a href="livres.html">Livres</a></li>
+                                <li><a href="auteurs.html">Auteurs</a></li>
+                                <li><a href="emprunteurs.html">Emprunteurs</a></li>
+                                <li><a href="a-propos.html">À propos</a></li>
+                                <li><a href="tarification.html">Tarification</a></li>
                                 <li class="has-dropdown">
-                                    <a href="blog.html">Tek-up</a>
+                                    <a href="blog.html">Blog</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Site web</a></li>
-                                        <li><a href="#">Facebook</a></li>
-                                        <li><a href="#">LinkedIn</a></li>
+                                        <li><a href="#">Conseils de lecture</a></li>
+                                        <li><a href="#">Critiques de livres</a></li>
+                                        <li><a href="#">Entretiens avec des auteurs</a></li>
+                                        <li><a href="#">Événements de la bibliothèque</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="pages/about.php">A propos</a></li>
-                                <li><a href="pages/contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="#"><span>Se connecter</span></a></li>
-                                <li class="btn-cta"><a href="#"><span>S'inscrire</span></a></li>
-                                <li><a href="teacher.html">FR</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li class="btn-cta"><a href="#"><span>Connexion</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -181,94 +203,25 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-monitor"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Livres informatiques</a></h3>
-                                <p>programmations, clouds, réseaux, IoTs, sécurités.</p>
+                    <?php
+                        $datas = $bd->lire("genre");
+                        foreach ($datas as $data) {
+                    ?>
+                            <div class="col-md-3 col-sm-6 text-center animate-box">
+                                <div class="services">
+                                    <span class="icon">
+                                    <i class="<?php echo $data['icon']; ?>"></i>
+                                </span>
+                                    <div class="desc">
+                                        <h3><a href="#"><?php echo $data['nom_genre']; ?></a></h3>
+                                        <p><?php echo $data['exemple']; ?></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-book"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Fiction </a></h3>
-                                <p>romans, nouvelles, poésie, théâtre, bande dessinée, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-book"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Non-fiction</a></h3>
-                                <p>biographies, mémoires, essais, livres de cuisine, livres de voyage, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-banknote"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Littérature classique</a></h3>
-                                <p>Shakespeare, Jane Austen, Charles Dickens, Victor Hugo, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-lab2"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Littérature contemporaine</a></h3>
-                                <p>tephen King, J.K. Rowling, Haruki Murakami, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-photo"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Livres de développement personnel</a></h3>
-                                <p>livres de motivation, de coaching, de méditation, de croissance personnelle, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-home-outline"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Livres de sciences humaines</a></h3>
-                                <p>sociologie, philosophie, psychologie, anthropologie, histoire, etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 text-center animate-box">
-                        <div class="services">
-                            <span class="icon">
-							<i class="icon-bubble3"></i>
-						</span>
-                            <div class="desc">
-                                <h3><a href="#">Livres religieux</a></h3>
-                                <p>bibles, corans, textes sacrés et commentaires religieux, etc.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
+                    
                 </div>
             </div>
         </div>
