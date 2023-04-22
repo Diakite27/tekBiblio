@@ -118,7 +118,7 @@
             <h1>Gestion des livres</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="accueil.php">Accueil</a></li>
                     <li class="breadcrumb-item">Gérer les livres</li>
                 </ol>
             </nav>
@@ -219,16 +219,16 @@
 
                             <!-- Table with stripped rows -->
                             <?php 
-                                $datas = $bd->lire("livre_auteur
-                                INNER JOIN livre ON livre_auteur.id_livre = livre.id_livre
-                                INNER JOIN auteur ON livre_auteur.id_auteur = auteur.id_auteur
-                                INNER JOIN genre ON livre.id_genre = genre.id_genre
+                                $datas = $bd->lire("livre
+                                LEFT JOIN livre_auteur ON livre.id_livre = livre_auteur.id_livre
+                                LEFT JOIN auteur ON livre_auteur.id_auteur = auteur.id_auteur
+                                LEFT JOIN genre ON livre.id_genre = genre.id_genre
                                 LEFT JOIN emprunt ON livre.id_livre = emprunt.id_livre AND emprunt.date_retour IS NULL
-                                GROUP BY livre.titre;
-                                ", "livre.id_livre, livre.titre, GROUP_CONCAT(auteur.nom , ' ', auteur.prenom SEPARATOR ' et ') AS auteurs, livre.nombre_exemplaires, genre.nom_genre AS genre,
+                                GROUP BY livre.id_livre, livre.titre, livre.nombre_exemplaires, genre.nom_genre ORDER BY livre.titre;
+                                ", "livre.id_livre, livre.titre, GROUP_CONCAT(DISTINCT auteur.nom, ' ', auteur.prenom SEPARATOR ' et ') AS auteurs, livre.nombre_exemplaires, genre.nom_genre AS genre,
                                 CASE 
-                                    WHEN livre.nombre_exemplaires - COUNT(emprunt.id_livre) > 0 THEN '<span style=\"color: green\">Oui</span>' 
-                                    ELSE '<span style=\"color: red\">Non</span>' 
+                                    WHEN livre.nombre_exemplaires - COUNT(DISTINCT emprunt.id) > 0 THEN '<span style=\"color: green\">Oui</span>' 
+                                    ELSE '<span style=\"color: red\">Non</span>'
                                 END AS dispo
                                 ");
                                 // var_dump($s);

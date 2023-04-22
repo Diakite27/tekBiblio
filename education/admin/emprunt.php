@@ -84,7 +84,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <!-- Ajouter le bouton pour ajouter un étudiant -->
+                                <!-- Ajouter le bouton pour emprunter un livre -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12 text-left">
@@ -161,7 +161,7 @@
                                 CASE 
                                     WHEN date_retour <= date_retour_prevue THEN '<span style=\"color: green\">Déposé</span>' 
                                     WHEN date_retour_prevue < NOW() THEN '<span style=\"color: red\"> Non Déposé</span>' 
-                                    ELSE '<span style=\"color: yellow\">En cours</span>' 
+                                    ELSE '<span style=\"color: blue\">En cours</span>' 
                                 END AS statut"
                                 );
                                 // var_dump($s);

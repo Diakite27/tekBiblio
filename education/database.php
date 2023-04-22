@@ -109,9 +109,9 @@ class Database {
                 }
             }
             $output .= '<td>';
-            $output .= '<a href="' . $url . '?action=modifier&id=' . $row[array_key_first($row)] . '"><i class="bi bi-pencil-square modifier" style="color: green; font-size: 15px; margin-top: 7px; margin-right: 4px;"></i></a> ';
-            $output .= '<a href="' . $url . '?action=voir&id=' . $row[array_key_first($row)] . '"><i class="bi bi-eye" style="color: #4D6194; font-size: 15px; margin-top: 7px; margin-right: 4px;"></i></a> ';
-            $output .= '<a href="' . $url . '?action=supprimer&id=' . $row[array_key_first($row)] . '"><i class="bi bi-trash" style="color: red; font-size: 15px; margin-top: 7px; margin-right: 2px;"></i></a>';
+            $output .= '<a href="' . $url . '?action=modifier&id=' . $row[array_key_first($row)] . '" title="Modifier"><i class="bi bi-pencil-square modifier" style="color: green; font-size: 15px; margin-top: 7px; margin-right: 4px;"></i></a> ';
+            $output .= '<a href="' . $url . '?action=voir&id=' . $row[array_key_first($row)] . '" title="Voir details"><i class="bi bi-eye" style="color: #4D6194; font-size: 15px; margin-top: 7px; margin-right: 4px;"></i></a> ';
+            $output .= '<a href="' . $url . '?action=supprimer&id=' . $row[array_key_first($row)] . '" title="Supprimer"><i class="bi bi-trash" style="color: red; font-size: 15px; margin-top: 7px; margin-right: 2px;"></i></a>';
             $output .= '</td>';
             $output .= '</tr>';
             $num++;

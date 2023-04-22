@@ -1,31 +1,31 @@
 <?php
-    require "../database.php";
+    require "database.php";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Connexion admin</title>
+  <title>Connexion </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="admin/assets/img/favico.png" rel="icon">
+  <link href="admin/assets/img/apple-touch-ico.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
+  <link href="admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+ 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="admin/assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -55,7 +55,7 @@
                 <p class="text-center small">Entrez votre nom d'utilisateur et votre mot de passe pour vous connecter</p>
               </div>
 
-              <form class="row g-3 needs-validation" method="post" action="" novalidate>
+              <form class="row g-3 needs-validation" method="post" action="">
 
                 <div class="col-12">
                   <label for="yourUsername" class="form-label">Nom d'utilisateur</label>
@@ -88,20 +88,19 @@
                     if (isset($_POST['envoyer'])) {
                             $email = $_POST['username'];
                             $password = $_POST['password'];
-                            $table = "admin";
-                            $condition = "email = '$email' and mot_de_passe = '$password'";
+                            $table = "eleve";
+                            $condition = "email = '$email' and mot_de_passe_eleve = '$password'";
                             $data = $bd->lire($table, "*", $condition);
-                            // $resultat = $req->fetch();
                             if (!$data)
                             {
                             echo '<span style="color:red; text-align: center; background-color: black; font-weight: bold; font-size: 15px; margin-left: ">Mauvais email ou mot de passe !</span>';
                             }
                             else
                             {
-                            $_SESSION['idA'] = $data[0]['id'];
-                            $_SESSION['nomA'] = $data[0]['nom'];
-                            $_SESSION['prenomA'] = $data[0]['prenom'];
-                            header('location: accueil.php');
+                            $_SESSION['idE'] = $data[0]['id_eleve'];
+                            $_SESSION['nomE'] = $data[0]['nom'];
+                            $_SESSION['prenomE'] = $data[0]['prenom'];
+                            header('location: indexx.php');
                             }
                     }
                 ?>
@@ -122,8 +121,6 @@
 
     </div>
   </main><!-- End #main -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 </body>
 
