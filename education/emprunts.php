@@ -2,17 +2,17 @@
     require "database.php";
     if(isset($_SESSION['idE'])){
         $id=$_SESSION['idE'];
-    $condition = "id_eleve = $id";
-    $livres = $bd->lire("emprunt
-    INNER JOIN livre ON emprunt.id_livre = livre.id_livre WHERE $condition
-    ORDER BY emprunt.id DESC;
-    ", "id, livre.titre, date_emprunt, date_retour_prevue,
-    CASE 
-        WHEN date_retour <= date_retour_prevue THEN '<span style=\"color: green\">Déposé</span>' 
-        WHEN date_retour_prevue < NOW() THEN '<span style=\"color: red\"> Non Déposé</span>' 
-        ELSE '<span style=\"color: blue\">En cours</span>' 
-    END AS statut
-    ");
+        $condition = "id_eleve = $id";
+        $livres = $bd->lire("emprunt
+        INNER JOIN livre ON emprunt.id_livre = livre.id_livre WHERE $condition
+        ORDER BY emprunt.id DESC;
+        ", "id, livre.titre, date_emprunt, date_retour_prevue,
+        CASE 
+            WHEN date_retour <= date_retour_prevue THEN '<span style=\"color: green\">Déposé</span>' 
+            WHEN date_retour_prevue < NOW() THEN '<span style=\"color: red\"> Non Déposé</span>' 
+            ELSE '<span style=\"color: blue\">En cours</span>' 
+        END AS statut
+        ");
     }
     
     
@@ -138,6 +138,7 @@
                     <th>Date emprunt</th>
                     <th>Date retour</th>
                     <th>Statut</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -148,6 +149,11 @@
                     <td><?php echo $livre['date_emprunt']; ?></td>
                     <td><?php echo $livre['date_retour_prevue']; ?></td>
                     <td><?php echo $livre['statut']; ?></td>
+                    <td>
+                        <a href="fiche_emprunt.php" class="detail" title="Imprimer fiche emprunt" data-toggle="modal" data-target="#detail" data-id="<?php echo $livre['id']; ?>" id="emprunt-link" style="margin-left: 12px;">
+                            <img src="https://img.icons8.com/fluency/20/null/print.png"/>
+                        </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
                 <?php else: ?>
@@ -158,6 +164,11 @@
             </tbody>
         <!-- Fin des contenus -->
     </table>
+    <form action="fiche_emprunt.php" method="POST">
+        <input type="hidden" name="empruntId" id="empruntIdInput">
+        <!-- Other form fields -->
+        <button type="submit"></button>
+    </form>
     </div>
 
     <!-- include les liens vers les fichiers JS nécessaires, y compris jQuery et DataTables -->
@@ -176,7 +187,14 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
     <script>
-      
+        document.getElementById('emprunt-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            var empruntId = this.getAttribute('data-id');
+            document.getElementById('empruntIdInput').value = empruntId;
+            document.querySelector('form').submit();
+        });
+</script>
+    <script>
       $(document).ready(function() {
     $('#example').DataTable({
       //indication du nombre d'éléments à afficher par page dans le tableau

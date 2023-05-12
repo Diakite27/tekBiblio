@@ -98,10 +98,10 @@
                             }
                             else
                             {
-                            $_SESSION['idA'] = $data[0]['id'];
-                            $_SESSION['nomA'] = $data[0]['nom'];
-                            $_SESSION['prenomA'] = $data[0]['prenom'];
-                            header('location: accueil.php');
+                              $_SESSION['idA'] = $data[0]['id'];
+                              $_SESSION['nomA'] = $data[0]['nom'];
+                              $_SESSION['prenomA'] = $data[0]['prenom'];
+                              header('location: accueil.php');
                             }
                     }
                 ?>

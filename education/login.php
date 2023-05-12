@@ -100,7 +100,7 @@
                             $_SESSION['idE'] = $data[0]['id_eleve'];
                             $_SESSION['nomE'] = $data[0]['nom'];
                             $_SESSION['prenomE'] = $data[0]['prenom'];
-                            header('location: indexx.php');
+                            header('location: index.php');
                             }
                     }
                 ?>
